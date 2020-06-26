@@ -6,11 +6,34 @@ import Chat from '../components/Chat';
 
 const Stack = createStackNavigator();
 
+const defaultStackNavOptions = {
+  headerTintColor: 'white',
+  headerStyle: {
+    backgroundColor: '#434A54',
+  },
+  headerTitleAlign: 'center',
+};
+
 const AppNavigator = (props) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Main" component={Main} />
-      <Stack.Screen name="Chat" component={Chat} />
+    <Stack.Navigator screenOptions={defaultStackNavOptions}>
+      <Stack.Screen
+        name="Main"
+        component={Main}
+        options={({route, navigation}) => ({
+          headerShown: false,
+          title: 'Home',
+        })}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={Chat}
+        options={({route, navigation}) => ({
+          title: route.params.name,
+          headerBackTitle: false,
+          // headerTintColor: ''
+        })}
+      />
     </Stack.Navigator>
   );
 };
